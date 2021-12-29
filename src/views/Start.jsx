@@ -1,12 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, TouchableOpacity, Image, View, ImageBackground } from 'react-native';
 import { useFonts, Tinos_400Regular } from '@expo-google-fonts/tinos';
-import { Link } from "react-router-native";
 
-
-
-export default function Start() {
+export default function Start({ navigation }) {
   let [fontsLoaded] = useFonts({
     Tinos_400Regular,
   });
@@ -15,6 +12,8 @@ export default function Start() {
       Loading
     </Text>);
   } else {
+    
+
     return (
       <View style={styles.container}>
         <ImageBackground source={require("../../assets/img/home.jpg")} style={styles.home}>
@@ -23,14 +22,13 @@ export default function Start() {
         <Text style={styles.descriptionText}>
           Find and share recipes with chefs and food enthusiasts all over the world
         </Text>
-        <TouchableOpacity style={styles.startButton}>
-          <Link to="/login">
+        <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate("Login")}>
+          
             <Text style={styles.buttonText}>
               Get Started
             </Text>
-          </Link>
+          
         </TouchableOpacity>
-        <StatusBar style="auto" />
       </View>
     );
   }
@@ -42,13 +40,11 @@ const styles = StyleSheet.create({
     marginTop: 350,
     width: 353,
     height: 158,
-
     fontFamily: "Tinos_400Regular",
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 34,
     textAlign: "center",
-
   },
   home: {
     position: "absolute",
@@ -90,9 +86,10 @@ const styles = StyleSheet.create({
     top: 30,
   },
   container: {
-    paddingTop: 20,
+    alignSelf :'stretch',
     flex: 1,
-    backgroundColor: '#FAFAFF',
+    paddingTop: 20,
+    backgroundColor: '#2B303A',
     alignItems: 'center',
     justifyContent: 'center',
     maxWidth: "100%",

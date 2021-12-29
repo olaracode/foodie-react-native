@@ -1,5 +1,12 @@
 {
   "expo": {
+    "userInterfaceStyle": "light",
+    "ios": {
+      "userInterfaceStyle": "light"
+    },
+    "android": {
+      "userInterfaceStyle": "light"
+    },
     "name": "Pokemon",
     "slug": "Pokemon",
     "version": "1.0.0",

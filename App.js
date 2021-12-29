@@ -1,33 +1,49 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, Image, View, ImageBackground } from 'react-native';
-import { useFonts, Tinos_400Regular } from '@expo-google-fonts/tinos';
 import Start from "./src/views/Start.jsx"
 import Login from "./src/views/Login.jsx"
+import Register from "./src/views/Register.jsx"
 
-import { NativeRouter, Route, Link, Routes } from "react-router-native";
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFonts, AbrilFatface_400Regular } from '@expo-google-fonts/abril-fatface';
+import injectContext from "./src/store/appContext";
 
 
-export default function App() {
-  return (
-    <NativeRouter>
-      <View style={styles.main_container}>
-        <Start />
-      </View>
-      <Routes>
-        <Route exact path="/" component={Start} />
-        <Route exact path="/login" component={Login} />
-      </Routes>
 
-    </NativeRouter>
-  );
+const Stack = createNativeStackNavigator();
+
+const appTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 255, 255)',
+    card: 'rgb(255, 255, 255)',
+    background: 'rgb(255, 255, 255)'
+  }
 }
 
 
+function App() {
+  let [fontsLoaded] = useFonts({
+    AbrilFatface_400Regular,
+  });
+  if (!fontsLoaded) {
+    return <Text>Loading</Text>;
+  } else {
+    return (
+      <NavigationContainer theme={appTheme}>
+        <Stack.Navigator initialRouteName="Start">
+          <Stack.Screen name="Start" component={Start} options={{
+            headerShown: false,
+          }} />
+          <Stack.Screen name="Login" component={Login} options={{ title: "Cherrish", headerTitleStyle: { fontFamily: "AbrilFatface_400Regular" } }} />
+          <Stack.Screen name="Register" component={Register} options={{ title: "", headerTitleStyle: { fontFamily: "AbrilFatface_400Regular" } }} />
 
-const styles = StyleSheet.create({
-  main_container: {
-    height: "100%",
-    width: "100%"
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
   }
-});
+}
+export default injectContext(App)
