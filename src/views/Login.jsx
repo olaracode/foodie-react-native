@@ -18,7 +18,7 @@ export default function Login({navigation}) {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText}>Login to Cherrish</Text>
-        <LoginForm />
+        <LoginForm navigation={navigation} />
         <Text style={styles.register}>
           Don't have an account? {" "}
           <Text style={styles.registerLink} onPress={() => navigation.navigate("Register")}>

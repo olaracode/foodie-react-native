@@ -6,7 +6,7 @@ import { useFonts, Tinos_400Regular } from '@expo-google-fonts/tinos';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
 
 
-const LoginForm = () => {
+const LoginForm = ({navigation}) => {
   let dropShadow = Platform.OS === "ios" ? styles.shadowProp : styles.elevation
   const { store, actions } = React.useContext(Context);
 
@@ -24,7 +24,7 @@ const LoginForm = () => {
         <TextInput placeholder="Username or Email" style={[styles.input, dropShadow]} />
         <TextInput placeholder="Password" style={[styles.input, dropShadow]} />
         <Text style={styles.auxText}>Forgot your password? <Text style={styles.linkText}>Click Here</Text></Text>
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Main")} >
           <Text style={styles.buttonText}>
             Login
           </Text>
