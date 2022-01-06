@@ -1,13 +1,37 @@
-import React from 'react'
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react'
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { useFonts, Tinos_400Regular } from '@expo-google-fonts/tinos';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Card from '../home/Card';
 
 const Home = () => {
     let [fontsLoaded] = useFonts({
         Tinos_400Regular,
       });
-
+    let posts = [
+            {
+                id: 1,
+                image: require("../../../assets/img/unnamed.jpg"),
+                profileImage: require("../../../assets/img/profile.jpg"),
+                username: "olaracooks",
+                dishName: "Tuna Sashimi",
+                dishDescription: "lorem ipsum"
+            },
+            {
+                id: 2,
+                image: require("../../../assets/img/unnamed.jpg"),
+                profileImage: require("../../../assets/img/profile.jpg"),
+                username: "olaracooks",
+                dishName: "Tuna Sashimi",
+                dishDescription: "lorem ipsum"
+            }
+        ]
+    
+    const [like, setlike] = useState(false)
+    const renderItem = (posts) => (
+        <Card post={posts}/>
+    )
     if (!fontsLoaded) {
         return (
             <Text>
@@ -16,72 +40,24 @@ const Home = () => {
         );
     } else {
         return (
-            <View style={styles.container}>
-                <View style={styles.cardContainer}>
-                    <Image source={require("../../../assets/img/unnamed.jpg")}
-                        style={{
-                            maxWidth: "100%",
-                            borderTopRightRadius: 8,
-                            borderTopLeftRadius: 8,
-                            height: 300
-                            
-                        }}
-                    />
-                    <View style={styles.cardBottom}>
-                        <View style={styles.bottomHeader}>
-                            <View style={{flexDirection: "row", alignItems: "center"}}>
-                                <Image source={require("../../../assets/img/profile.jpg")} resizeMode="contain" style={styles.profileImage} />
-                                <Text style={{paddingHorizontal: 10}}>@olaracode</Text>
-                            </View>
-                            <Text style={{color: "#878787"}}>Follow</Text>
-                        </View>
-                        <View style={styles.cardBody}>
-                            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 10}}>
+            <View>
 
-                            <Text style={{fontWeight: "bold", fontSize: 24, paddingBottom: 5}}>
-                                Tuna Sashimi
-                            </Text>
-                            
-                            </View>
-                            <Text>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, possimus...
-                            </Text>
-                        </View>
-                        <View style={styles.dishSpecs}>
-                            <View style={{flexDirection: "row"}}>
-                                <View style={styles.specs}>
-                                    <Image style={styles.specsIcon} source={require("../../../assets/img/persons.png")}/>
-                                    <Text>3-5</Text>
-                                </View>
-                                <View style={styles.specs}>
-                                    <Image style={{width: 20, height:20, tintColor: "white", marginRight: 5}} source={require("../../../assets/img/clock.png")}/>
-                                    <Text>2 Hr</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={styles.cardButtons}>
-                            <TouchableOpacity style={styles.ctaButton}>
-                                <Text style={{fontWeight: "bold"}}>
-                                    Preparation
-                                </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.likeButton}>
-                                <Image style={{tintColor: "white"}} source={require("../../../assets/img/favorite_border.png")}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.saveButton}>
-                                <Image style={{tintColor: "white"}} source={require("../../../assets/img/bookmark_border.png")}/>
-                            </TouchableOpacity>
-                        </View>
-                    </View>    
-                </View>
+                <FlatList 
+                    data={posts}
+                    renderItem={renderItem} 
+                    keyExtractor={post => post.id}  
+                />
             </View>
+                
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        
+        height: "120%",
+        width: "100%",
+        marginBottom: 50,
     },
     logoText: {
         fontFamily: "Tinos_400Regular",
@@ -135,9 +111,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
+    elevation: {
+        elevation: 10,
+        shadowColor: '#000',
+      },
     ctaButton: {
-        backgroundColor: "#29C16E",
+        backgroundColor: "#4E576A",
         borderRadius: 100,
+        borderColor: "#111317",
+        borderWidth: 1,
         width: 194,
         height: 40,
         alignItems: "center",
@@ -146,9 +128,6 @@ const styles = StyleSheet.create({
     likeButton: {
         height: 40,
         width: 40,
-        borderRadius: 100,
-        borderWidth: 1,
-        borderColor: "#EF3C56",
         alignItems: "center",
         justifyContent: "center"
     },

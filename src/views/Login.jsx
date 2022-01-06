@@ -4,9 +4,12 @@ import { StyleSheet, Text, TouchableOpacity, Image, View, ImageBackground } from
 import { useFonts, Tinos_400Regular } from '@expo-google-fonts/tinos';
 import LoginForm from '../components/login/LoginForm.jsx';
 import RegisterButton from '../components/login/RegisterButtons.jsx';
+import { useTheme } from '@react-navigation/native';
 
 
 export default function Login({navigation}) {
+  const { colors } = useTheme();
+
   let [fontsLoaded] = useFonts({
     Tinos_400Regular,
   });
@@ -16,15 +19,9 @@ export default function Login({navigation}) {
     </Text>);
   } else {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: colors.background}]}>
         <Text style={styles.titleText}>Login to Cherrish</Text>
         <LoginForm navigation={navigation} />
-        <Text style={styles.register}>
-          Don't have an account? {" "}
-          <Text style={styles.registerLink} onPress={() => navigation.navigate("Register")}>
-            Register now
-          </Text>
-        </Text>
       </View>
     );
   }
@@ -33,7 +30,6 @@ export default function Login({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#2B303A",
     flex: 1,
     alignItems: 'center',
     maxWidth: "100%",

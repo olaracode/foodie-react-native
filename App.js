@@ -12,19 +12,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts, AbrilFatface_400Regular } from '@expo-google-fonts/abril-fatface';
 import injectContext from "./src/store/appContext";
 
+const MyTheme = {
+  dark: true,
+  colors: {
+    primary: '#EF3C56',
+    secondary: "#07886E",
+    background: '#2B303A',
+    card: '#353A44',
+    text: '#fafafa',
+    textClear: '#878787',
+    border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
+  },
+};
 
 
 const Stack = createNativeStackNavigator();
-
-const appTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'rgb(255, 255, 255)',
-    card: 'rgb(255, 255, 255)',
-    background: 'rgb(255, 255, 255)'
-  }
-}
 
 
 function App() {
@@ -35,16 +38,14 @@ function App() {
     return <Text>Loading</Text>;
   } else {
     return (
-      <NavigationContainer theme={appTheme}>
+      <NavigationContainer theme={MyTheme}>
         <Stack.Navigator initialRouteName="Start">
           <Stack.Screen name="Start" component={Start} options={{
             headerShown: false,
           }} />
           <Stack.Screen name="Login" component={Login} options={{ title: "Cherrish", headerTitleStyle: { fontFamily: "AbrilFatface_400Regular" }, headerStyle: { backgroundColor: "#2B303A" } }} />
           <Stack.Screen name="Register" component={Register} options={{ title: "", headerTitleStyle: { fontFamily: "AbrilFatface_400Regular" }, headerStyle: { backgroundColor: "#2B303A" } }} />
-          <Stack.Screen name="Main" component={Main} options={{
-            headerShown: false,
-          }} />
+          <Stack.Screen name="Main" component={Main} options={{ headerShown: false, title: "", headerTitleStyle: { fontFamily: "AbrilFatface_400Regular" }, headerStyle: { backgroundColor: "#2B303A" } }} />
 
         </Stack.Navigator>
       </NavigationContainer>

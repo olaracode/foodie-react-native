@@ -6,13 +6,26 @@ import Explore from '../components/main/Explore';
 import Add from '../components/main/Add';
 import Bookmarks from '../components/main/Bookmarks';
 import Profile from '../components/main/Profile';
+import { useTheme } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const Tab = createBottomTabNavigator();
 
 const CustomTabBarButton = ({children, onPress}) => (
     <TouchableOpacity
-        style={styles.addButton} 
+        style={{
+            width: 60,
+            height: 60,
+            bottom: 30,
+            borderRadius: 100,
+            borderWidth: 3,
+            borderColor: "black",
+            alignItems: 'center',
+            justifyContent: "center",
+            backgroundColor: "#353A44"
+        }}  
+         
         onPress={onPress}
     >
         <View>
@@ -22,6 +35,9 @@ const CustomTabBarButton = ({children, onPress}) => (
 )
 
 const Main = () => {
+    const { colors } = useTheme();
+    const styles = React.useMemo(() => createStyles(colors), [colors]);
+
     return (
         <Tab.Navigator screenOptions={{tabBarStyle: {position:"absolute", backgroundColor: "#2B303A", height: 60}}}>
             <Tab.Screen name="Home" component={Home} options={{
@@ -31,12 +47,7 @@ const Main = () => {
                 headerStyle: { backgroundColor: "#2B303A" },
                 tabBarIcon: ({focused}) => (
                     <View>
-                        <Image source={require("../../assets/img/home.png")}
-                            resizeMode="contain"  
-                            style={{
-                                tintColor: focused ? '#EF3C56' : 'black'
-                            }}    
-                        />
+                       <Icon name="home" size={ 20 } color={focused ? colors.primary : "white"} />
                     </View>
                 ),
             }}
@@ -46,12 +57,7 @@ const Main = () => {
                 headerShown: false, 
                 tabBarIcon: ({focused}) => (
                     <View>
-                        <Image source={require("../../assets/img/explore.png")}
-                            resizeMode="contain"      
-                            style={{
-                                tintColor: focused ? '#EF3C56' : 'black'
-                            }}    
-                        />
+                        <Icon name="compass" size={ 20 } color={focused ? colors.primary : "#000000"} />
                     </View>
                 ),
             }}
@@ -75,12 +81,8 @@ const Main = () => {
                 headerShown: false, 
                 tabBarIcon: ({focused}) => (
                     <View>
-                        <Image source={require("../../assets/img/bookmarks.png")}
-                            resizeMode="contain"      
-                            style={{
-                                tintColor: focused ? '#EF3C56' : 'black'
-                            }}    
-                        />
+                        <Icon name="bookmark" size={ 20 } color={focused ? colors.primary : "black"} />
+                       
                     </View>
                 ),
             }}
@@ -90,12 +92,8 @@ const Main = () => {
                 headerShown: false, 
                 tabBarIcon: ({focused}) => (
                     <View>
-                        <Image source={require("../../assets/img/person.png")}
-                            resizeMode="contain"     
-                            style={{
-                                tintColor: focused ? '#EF3C56' : 'black'
-                            }}     
-                        />
+                        <Icon name="user" size={ 20 } color={focused ? colors.primary : "black"} />
+
                     </View>
                 ),
             }}
@@ -105,7 +103,7 @@ const Main = () => {
     )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (theme) => StyleSheet.create({
     container: {
         backgroundColor: "#2B303A"
     },
@@ -113,7 +111,6 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         bottom: 30,
-        backgroundColor:"#A0CAB3",
         borderRadius: 100,
         borderWidth: 3,
         borderColor: "black",

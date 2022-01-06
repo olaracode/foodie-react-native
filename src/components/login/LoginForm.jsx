@@ -4,9 +4,11 @@ import { Context } from "../../store/appContext";
 import { StyleSheet, Text, TextInput, Image, View, ImageBackground, Platform, TouchableOpacity } from 'react-native';
 import { useFonts, Tinos_400Regular } from '@expo-google-fonts/tinos';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
-
+import { useTheme } from '@react-navigation/native';
 
 const LoginForm = ({navigation}) => {
+  const { colors } = useTheme();
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
   let dropShadow = Platform.OS === "ios" ? styles.shadowProp : styles.elevation
   const { store, actions } = React.useContext(Context);
 
@@ -24,7 +26,7 @@ const LoginForm = ({navigation}) => {
         <TextInput placeholder="Username or Email" style={[styles.input, dropShadow]} />
         <TextInput placeholder="Password" style={[styles.input, dropShadow]} />
         <Text style={styles.auxText}>Forgot your password? <Text style={styles.linkText}>Click Here</Text></Text>
-        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Main")} >
+        <TouchableOpacity style={[styles.loginButton]} onPress={() => navigation.navigate("Main")} >
           <Text style={styles.buttonText}>
             Login
           </Text>
@@ -33,20 +35,26 @@ const LoginForm = ({navigation}) => {
                 <Image source={require("../../../assets/img/google.png")} />
                 <Text style={styles.googleLogo}>Login using google</Text>
         </TouchableOpacity>
+         <Text style={styles.register}>
+          Don't have an account? {" "}
+          <Text style={styles.registerLink} onPress={() => navigation.navigate("Register")}>
+            Register now
+          </Text>
+        </Text>
       </View>
     );
   }
 }
 
 
-const styles = StyleSheet.create({
+const createStyles = (theme) => StyleSheet.create({
     input: {
         marginTop: 30,
         height: 60,
         width: "90%",
         borderRadius: 50,
-        backgroundColor: "#353A44",
-        padding: 15
+        padding: 15,
+        backgroundColor: theme.card
     },
     container: {
         paddingTop: 30,
@@ -69,8 +77,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       width: "90%",
       height: 60,
-      backgroundColor: "#EF3C56",
       borderRadius: 50,
+      backgroundColor: theme.primary
     },
     buttonText: {
       textAlign: "center",
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
       lineHeight: 28,
       fontSize: 24,
       fontFamily: "Tinos_400Regular",
-      color: "white",
+      color: theme.text,
     },
     auxText: {
       width: "80%",
@@ -89,30 +97,32 @@ const styles = StyleSheet.create({
       alignSelf: "center"
     },
     linkText: {
-      color: "#29C16E"
+      color: theme.secondary
     },
     google: {
       flexDirection: "row",
       marginTop: 30,
-      backgroundColor: "#353A44",
+      backgroundColor: theme.card,
     },
     googleLogo: {
         paddingLeft: 5,
         fontSize: 20,
-
-
         fontFamily: "Tinos_400Regular",
-        color: "white",
+        color: theme.text,
     },
     Button: {
       justifyContent: 'center',
       alignItems: 'center',
       width: "90%",
       height: 60,
-      backgroundColor: "#353A44",
       borderRadius: 50,
-      
     },
+    register: {
+      paddingTop: 60,
+    },
+    registerLink: {
+      color: theme.secondary
+    }
 
 });
 
