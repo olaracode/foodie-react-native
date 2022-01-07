@@ -1,14 +1,12 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 const Add = () => {
-    return (
-        <View>
-            <Text>
-                This is a create section
-            </Text>
-        </View>
-    )
-}
+  return (
+    <View>
+      <Text>This is a create section</Text>
+    </View>
+  );
+};
 
-export default Add
+export default Add;

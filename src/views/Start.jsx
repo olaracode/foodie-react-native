@@ -1,39 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useContext} from 'react';
-import { StyleSheet, Text, TouchableOpacity, Image, View, ImageBackground } from 'react-native';
-import { useFonts, Tinos_400Regular } from '@expo-google-fonts/tinos';
+import { StatusBar } from "expo-status-bar";
+import React, { useContext } from "react";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  View,
+  ImageBackground,
+} from "react-native";
+import { useFonts, Tinos_400Regular } from "@expo-google-fonts/tinos";
 
 export default function Start({ navigation }) {
   let [fontsLoaded] = useFonts({
     Tinos_400Regular,
   });
   if (!fontsLoaded) {
-    return (<Text>
-      Loading
-    </Text>);
+    return <Text>Loading</Text>;
   } else {
-    
-
     return (
       <View style={styles.container}>
-        <ImageBackground source={require("../../assets/img/home.jpg")} style={styles.home}>
-          <Image source={require("../../assets/img/logo.png")} style={styles.logo} />
+        <ImageBackground
+          source={require("../../assets/img/home.jpg")}
+          style={styles.home}
+        >
+          <Image
+            source={require("../../assets/img/logo.png")}
+            style={styles.logo}
+          />
         </ImageBackground>
         <Text style={styles.descriptionText}>
-          Find and share recipes with chefs and food enthusiasts all over the world
+          Find and share recipes with chefs and food enthusiasts all over the
+          world
         </Text>
-        <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate("Login")}>
-          
-            <Text style={styles.buttonText}>
-              Get Started
-            </Text>
-          
+        <TouchableOpacity
+          style={styles.startButton}
+          onPress={() => navigation.navigate("Login")}
+        >
+          <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   descriptionText: {
@@ -57,18 +65,18 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     shadowColor: "#00b249",
     shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 5
+    shadowOpacity: 5,
   },
   buttonText: {
     textAlign: "center",
     margin: "auto",
     lineHeight: 28,
-    fontSize: 24
+    fontSize: 24,
   },
   startButton: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
     width: "90%",
     height: 73,
@@ -86,12 +94,12 @@ const styles = StyleSheet.create({
     top: 30,
   },
   container: {
-    alignSelf :'stretch',
+    alignSelf: "stretch",
     flex: 1,
     paddingTop: 20,
-    backgroundColor: '#2B303A',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#2B303A",
+    alignItems: "center",
+    justifyContent: "center",
     maxWidth: "100%",
   },
 });
